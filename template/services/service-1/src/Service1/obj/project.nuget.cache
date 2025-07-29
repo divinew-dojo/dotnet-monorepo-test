@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4wQQ8ncJH2U=",
+  "dgSpecHash": "n9P67uxHMG0=",
   "success": true,
   "projectFilePath": "/Users/divine.wodi/Desktop/dotnet-monorepo-test/template/services/service-1/src/Service1/Service1.csproj",
-  "expectedPackageFiles": [
-    "/Users/divine.wodi/.nuget/packages/microsoft.aspnetcore.openapi/9.0.7/microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
-    "/Users/divine.wodi/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
