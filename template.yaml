@@ -1,0 +1,66 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: dotnet-monorepo-template
+  title: Dotnet Monorepo Template
+  description: A template for creating a .NET monorepo with multiple services.
+  tags:
+    - dotnet
+    - monorepo
+spec:
+  owner: builds-processes-squad
+  type: template
+  parameters:
+    - title: Fill in the following steps
+      required:
+      - domain
+      - repoUrl
+      - owner
+      properties:
+        domain:
+          title: Domain
+          type: object
+          required:
+          - domain
+          - system
+          ui:field: DojoSystemPicker
+        owner:
+          title: Owner
+          type: object
+          required:
+          - tribe
+          - squad
+          ui:field: DojoSquadPicker
+          ui:options:
+            preSelectOwned: true
+        repoUrl:
+          title: Repository Loocation
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts: ['github.com']
+            allowedOwners: ['divinew-dojo']
+            # allowedOwners: ['dojo-engineering-dev'] uncomment when trying to publish to dojo-eng-dev org
+  
+  steps:
+    - id: fetch_template
+      name: Fetch Skeleton
+      action: fetch:template
+      input:
+        url: ./template
+        cookiecutterCompat: false
+        values:
+          repoUrl: ${{ parameters.repoUrl }}
+          owner: ${{ parameters.owner.squad | replace('-squad', '') }}
+          domain: ${{ parameters.domain.domain | replace('-domain', '') }}
+          system: ${{ parameters.domain.system | replace('-system', '') }}
+          repo_owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
+          repo_name: ${{ (parameters.repoUrl | parseRepoUrl).repo }}
+    
+    - id: create-repo
+      name: Create Repository
+      action: publish:github
+      input:
+       repoUrl: ${{ parameters.repoUrl }}
+       description: 'Initial commit for .NET monorepo with multiple services.' 
+       defaultBranch: main

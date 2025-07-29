@@ -1,0 +1,18 @@
+apiVersion: platform.dojo.tech/v1alpha1
+kind: App
+metadata:
+  domain: ${{ values.domain }}
+  system: ${{ values.system }}
+  name: ${{ values.repo_name }}
+containers:
+  - name: ${{ values.repo_name }}
+    type: application
+    imageName: ${{ values.repo_name }}
+    command: []
+    env: {}
+memory: 512Mi
+cpu: 50m
+runtime: dotnet
+instruments:
+  serviceAccount:
+    type: ManagedIAM/ServiceAccountV1

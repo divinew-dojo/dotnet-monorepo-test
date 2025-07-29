@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: $${{ values.repo_name }}
+  description: A ${{ values.repo_name }} .NET monorepo
+  tags:
+    - dotnet
+    - monorepo
+  annotations:
+    github.com/project-slug: ${{ values.repo_owner }}/${{ values.repo_name }}
+spec:
+  type: repository
+  lifecycle: experimental
+  owner: ${{ values.owner }}
+  system: ${{ values.system }}
