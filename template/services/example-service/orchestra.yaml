@@ -3,11 +3,11 @@ kind: App
 metadata:
   domain: ${{ values.domain }}
   system: ${{ values.system }}
-  name: ExampleService #name of app /service1 etc..
+  name: ExampleService # This will be the name of your service
 containers:
-  - name: ExampleService #'...'
+  - name: ExampleService # This will be the name of your service
     type: application
-    imageName: ${{ values.repo_name }} # will be removed at some point in near future
+    imageName: ${{ values.repo_name }} # keep for now?
     command: []
     env: {}
 memory: 512Mi
