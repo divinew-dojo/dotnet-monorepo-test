@@ -1,0 +1,30 @@
+name: Rollback (prod)
+run-name: "Rollback (prod): ${{ inputs.app_version }} by @${{ github.actor }}"
+on:
+  workflow_dispatch:
+    inputs:
+      app_version:
+        description: 'App version (0.1.0+sha-1234567)'
+        required: true
+        type: string
+      services:
+        description: 'Comma separated list of services to deploy. If not provided, all services will be deployed.'
+        required: false
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  deploy:
+    uses: dojo-engineering/github-workflows/.github/workflows/dotnet-monorepo-deploy.yml@main
+    with: # section needs review, some fields will probably be removed
+      app-version: ${{ inputs.app_version }}
+      services: ${{ inputs.services }}
+      environment: prod
+      cluster-id: gke-firefly-prod-2018-europe-west2-production
+      helm-repository: europe-west2-docker.pkg.dev/dojo-common-prod/dojo-charts/billing
+      gitops-repository: firefly-gitops
+      flavour: firefly
+      area: ${{ values.domain }}
+    secrets: inherit

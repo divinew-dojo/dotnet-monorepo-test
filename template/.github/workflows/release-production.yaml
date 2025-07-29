@@ -1,0 +1,45 @@
+name: Release (production)
+
+on:
+  workflow_dispatch:
+    inputs:
+      services_to_build:
+        description: 'Service name(s) to build, comma separated'
+        required: false
+        type: string
+  push:
+    branches:
+      - 'main'
+      - 'master'
+
+jobs:
+  build:
+    uses: dojo-engineering/github-workflows/.github/workflows/dotnet-monorepo.yml@main
+    with: # this section needs review as some/most fields will not be needed
+      area: ${{ values.domain }}
+      cloudsdk_container_cluster: production
+      cloudsdk_core_project: firefly-prod-2018
+      solution: ${{ values.domain }}.sln
+      enabled_argocd: true
+      services_to_build: ${{ github.event.inputs.services_to_build }}
+      environment: prod
+      dotnet_version: 8
+      disable_conductor: true
+      cluster_id: gke-firefly-prod-2018-europe-west2-production
+      gitops_repository: firefly-gitops
+      gitops_flavour: firefly
+      helm_repository: europe-west2-docker.pkg.dev/dojo-common-prod/dojo-charts/billing
+      verify_communications_templates: true
+      communications_uploader_version: '3.0'
+      test_output_pages_path: './e2e/Billing.IntegrationTest/TestResultsOutput'
+    secrets: inherit
+  
+  E2E_SIT_Test_Results:
+    if: ${{ success() || failure() }} # run this step even if previous step failed
+    name: E2E Test Report
+    uses: ./.github/workflows/e2e-html-reporting.yaml
+    needs: Build
+    with:
+      area: ${{ values.domain }}
+      solution: ${{ values.domain }}.sln
+    secrets: inherit

@@ -1,0 +1,43 @@
+name: E2ESITReport # unsure what name would be, configured using domain and system maybe??
+
+on:
+  workflow_call:
+    inputs:
+      area:
+        type: string
+        required: true
+      solution:
+        type: string
+        description: 'Path to the solution file. If none is provided, the action will build a new solution based on the *.csproj files found in the repository'
+        required: true
+      runner:
+        type: string
+        required: false
+        default: warp-ubuntu-latest-x64-2x
+        description: 'Requests non default runner for the build job'
+      test_output_pages_path:
+        type: string
+        required: false
+        default: '.'
+        description: 'Test output artifacts directory for reporting.'
+
+jobs:
+  publish-report:
+    name:  Publish Test Report
+    runs-on: ${{ inputs.runner }}
+    permissions:
+      contents: write
+      id-token: write
+      pages: write
+      actions: write
+      checks: write
+      packages: write
+
+    steps:
+      - name: E2E SIT Test Report
+        if: ${{ success() || failure() }} # run this step even if previous step failed
+        continue-on-error: true
+        run: |
+          OWNER_REPO_NAME=${{ github.repository }}
+          REPO_NAME=$(echo "$OWNER_REPO_NAME" | cut -d'/' -f2)
+          echo "End-2-End SIT NScenario Test Report : https://${{ github.repository_owner }}.github.io/$REPO_NAME/htmlReports/${{ github.ref_name }}/index.html"
