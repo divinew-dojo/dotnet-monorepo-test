@@ -15,7 +15,7 @@ jobs:
   build:
     uses: dojo-engineering/github-workflows/.github/workflows/dotnet-monorepo-build.yml@main
     with:
-      area: <domain-area>
-      solution: Repository.sln
+      area: <domain-area> # insert domain name in this part of file
+      solution: Repository.sln # possibly change to name of domain -> <Domain>.sln
       disable_conductor: true
     secrets: inherit

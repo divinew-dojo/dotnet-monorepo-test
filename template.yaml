@@ -14,7 +14,6 @@ spec:
     - title: Fill in the following steps
       required:
       - domain
-      - repoUrl
       - owner
       properties:
         domain:
@@ -33,14 +32,6 @@ spec:
           ui:field: DojoSquadPicker
           ui:options:
             preSelectOwned: true
-        repoUrl:
-          title: Repository Loocation
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts: ['github.com']
-            allowedOwners: ['divinew-dojo']
-            # allowedOwners: ['dojo-engineering-dev'] uncomment when trying to publish to dojo-eng-dev org
   
   steps:
     - id: fetch_template
@@ -50,17 +41,17 @@ spec:
         url: ./template
         cookiecutterCompat: false
         values:
-          repoUrl: ${{ parameters.repoUrl }}
+          repo_name: ${{ parameters.domain.domain | replace('-domain', '') }}-monorepo
+          repo_owner: 'divinew-dojo' # change to dojo-engineering-dev when necessary
+
           owner: ${{ parameters.owner.squad | replace('-squad', '') }}
           domain: ${{ parameters.domain.domain | replace('-domain', '') }}
           system: ${{ parameters.domain.system | replace('-system', '') }}
-          repo_owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
-          repo_name: ${{ (parameters.repoUrl | parseRepoUrl).repo }}
     
     - id: create-repo
       name: Create Repository
       action: publish:github
       input:
-       repoUrl: ${{ parameters.repoUrl }}
-       description: 'Initial commit for .NET monorepo with multiple services.' 
+       repoUrl: github.com?owner=divinew-dojo&repo=${{ parameters.domain.domain | replace('-domain', '') }}-monorepo
+       description: "Initial commit for ${{ parameters.domain.domain | replace('-domain', '') }} .NET monorepo with multiple services."
        defaultBranch: main

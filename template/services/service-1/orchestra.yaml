@@ -3,11 +3,11 @@ kind: App
 metadata:
   domain: ${{ values.domain }}
   system: ${{ values.system }}
-  name: ${{ values.repo_name }}
+  name: ${{ values.repo_name }} #name of app /service1 etc..
 containers:
-  - name: ${{ values.repo_name }}
+  - name: ${{ values.repo_name }} #'...'
     type: application
-    imageName: ${{ values.repo_name }}
+    imageName: ${{ values.repo_name }} # will be removed at some point in near future
     command: []
     env: {}
 memory: 512Mi
