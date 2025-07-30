@@ -52,6 +52,6 @@ spec:
       name: Create Repository
       action: publish:github
       input:
-       repoUrl: github.com?owner=divinew-dojo&repo=${{ parameters.domain.domain | replace('-domain', '') }}
+       repoUrl: github.com?owner=divinew-dojo&repo=${{ parameters.domain.domain | replace('-domain', '') }} # Also change owner to dojo-engineering-dev when necessary
        description: "Initial commit for ${{ parameters.domain.domain | replace('-domain', '') }} .NET monorepo with multiple services."
        defaultBranch: main
