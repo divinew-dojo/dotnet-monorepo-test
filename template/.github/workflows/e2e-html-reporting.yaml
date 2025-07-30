@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - name: E2E SIT Test Report
-        if: ${{ success() || failure() }} # run this step even if previous step failed
+        if: "${{ success() || failure() }}" # run this step even if previous step failed
         continue-on-error: true
         run: |
           OWNER_REPO_NAME=${{ github.repository }}
