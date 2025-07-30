@@ -23,7 +23,7 @@ jobs:
       services: ${{ inputs.services }}
       environment: prod
       cluster-id: gke-firefly-prod-2018-europe-west2-production
-      helm-repository: europe-west2-docker.pkg.dev/dojo-common-prod/dojo-charts/billing
+      helm-repository: europe-west2-docker.pkg.dev/dojo-common-prod/dojo-charts/${{ values.domain }}
       gitops-repository: firefly-gitops
       flavour: firefly
       area: ${{ values.domain }}

@@ -9,20 +9,20 @@ jobs:
   synchronize-service-translations:
     uses: dojo-engineering/github-workflows/.github/workflows/lokalise-sync-v2.yml@main
     with: # this section will be reviewed as some fields won't be needed
-      locales_folder_override: '*/*/*/Locales'
+#      locales_folder_override: '*/*/*/Locales'
       is_plural_format_v3: true
-    secrets:
-      lokalise_api_token: ${{ secrets.LOKALISE_API_TOKEN }}
-      lokalise_project_id: ${{ secrets.LOKALISE_PROJECT_ID }}
-      dojo_ci_app_id: ${{ secrets.DOJO_CI_APP_ID }}
-      dojo_ci_key: ${{ secrets.DOJO_CI_KEY }}
-  synchronize-comms-translations:
-    uses: dojo-engineering/github-workflows/.github/workflows/lokalise-sync-v2.yml@main
-    with:
-      locales_folder_override: 'services/billing-notification/communications-templates/*/locales' # this line may be changed, find out what it's used for
-      is_comms_sync: true
-    secrets:
-      lokalise_api_token: ${{ secrets.LOKALISE_API_TOKEN }}
-      lokalise_project_id: ${{ secrets.LOKALISE_COMMS_PROJECT_ID }}
-      dojo_ci_app_id: ${{ secrets.DOJO_CI_APP_ID }}
-      dojo_ci_key: ${{ secrets.DOJO_CI_KEY }}
+#    secrets:
+#      lokalise_api_token: ${{ secrets.LOKALISE_API_TOKEN }}
+#      lokalise_project_id: ${{ secrets.LOKALISE_PROJECT_ID }}
+#      dojo_ci_app_id: ${{ secrets.DOJO_CI_APP_ID }}
+#      dojo_ci_key: ${{ secrets.DOJO_CI_KEY }}
+#  synchronize-comms-translations:
+#    uses: dojo-engineering/github-workflows/.github/workflows/lokalise-sync-v2.yml@main
+#    with:
+#      locales_folder_override: 'services/billing-notification/communications-templates/*/locales' # this line may be changed, find out what it's used for
+#      is_comms_sync: true
+#    secrets:
+#      lokalise_api_token: ${{ secrets.LOKALISE_API_TOKEN }}
+#      lokalise_project_id: ${{ secrets.LOKALISE_COMMS_PROJECT_ID }}
+#      dojo_ci_app_id: ${{ secrets.DOJO_CI_APP_ID }}
+#      dojo_ci_key: ${{ secrets.DOJO_CI_KEY }}

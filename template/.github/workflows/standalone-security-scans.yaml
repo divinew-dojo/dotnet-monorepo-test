@@ -11,4 +11,4 @@ jobs:
     secrets: inherit
     with:
       # disable-comments: true # to disable comments from PRs
-      wiz-project-uuid: ${{ vars.WIZ_PROJECT_UUID_PAYMENTS_PLATFORM }}
+#      wiz-project-uuid: ${{ vars.WIZ_PROJECT_UUID_PAYMENTS_PLATFORM }}
