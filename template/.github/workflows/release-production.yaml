@@ -35,7 +35,7 @@ jobs:
     secrets: inherit
   
 #  E2E_SIT_Test_Results:
-#    if: "${{ success() || failure() }}" # run this step even if previous step failed
+#    if: "{{ success() || failure() }}" # run this step even if previous step failed
 #    name: E2E Test Report
 #    uses: ./.github/workflows/e2e-html-reporting.yaml
 #    needs: Build
