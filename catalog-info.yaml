@@ -42,7 +42,7 @@ spec:
         cookiecutterCompat: false
         values:
           repo_name: ${{ parameters.domain.domain | replace('-domain', '') }}-TEST
-          repo_owner: 'dojo-engineering-dev'
+          repo_owner: 'dojo-engineering'
 
           owner: ${{ parameters.owner.squad | replace('-squad', '') }}
           domain: ${{ parameters.domain.domain | replace('-domain', '') }}
@@ -52,6 +52,6 @@ spec:
       name: Create Repository
       action: publish:github
       input:
-       repoUrl: github.com?owner=dojo-engineering-dev&repo=${{ parameters.domain.domain | replace('-domain', '') }}-TEST
+       repoUrl: github.com?owner=dojo-engineering&repo=${{ parameters.domain.domain | replace('-domain', '') }}-TEST
        description: "Initial commit for ${{ parameters.domain.domain | replace('-domain', '') }} .NET monorepo with multiple services."
        defaultBranch: main

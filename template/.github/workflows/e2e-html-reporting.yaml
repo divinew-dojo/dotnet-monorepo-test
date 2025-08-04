@@ -40,5 +40,5 @@ jobs:
         continue-on-error: true
         run: |
           REPO_NAME=${{ parameters.domain.domain | replace('-domain', '') }}-TEST
-          echo "End-2-End SIT NScenario Test Report : https://dojo-engineering-dev.github.io/$REPO_NAME/htmlReports/main/index.html"
+          echo "End-2-End SIT NScenario Test Report : https://dojo-engineering.github.io/$REPO_NAME/htmlReports/main/index.html"
         {% endraw %}
