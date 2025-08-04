@@ -39,6 +39,6 @@ jobs:
         if: ${{ success() || failure() }} # run this step even if previous step failed
         continue-on-error: true
         run: |
-          REPO_NAME=${{values.domain}}-TEST
+          REPO_NAME=${{ parameters.domain.domain | replace('-domain', '') }}-TEST
           echo "End-2-End SIT NScenario Test Report : https://dojo-engineering-dev.github.io/$REPO_NAME/htmlReports/main/index.html"
         {% endraw %}
