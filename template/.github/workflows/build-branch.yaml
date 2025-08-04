@@ -25,12 +25,14 @@ jobs:
       # test_output_pages_path: './e2e/${{ values.domain }}.IntegrationTest/TestResultsOutput' # probably won't be needed
     secrets: inherit
 
-#  E2E_SIT_Test_Results:
-#    if: {{ success() || failure() }} # run this step even if previous step failed
-#    name: E2E Test Report
-#    uses: ./.github/workflows/e2e-html-reporting.yaml
-#    needs: Build
-#    with:
-#      area: ${{ values.domain }}
-#      solution: ${{ values.domain }}.sln
-#    secrets: inherit
+  E2E_SIT_Test_Results:
+    {% raw %}
+    if: ${{ success() || failure() }} # run this step even if previous step failed
+    {% endraw %}
+    name: E2E Test Report
+    uses: ./.github/workflows/e2e-html-reporting.yaml
+    needs: Build
+    with:
+      area: ${{ values.domain }}
+      solution: ${{ values.domain }}.sln
+    secrets: inherit

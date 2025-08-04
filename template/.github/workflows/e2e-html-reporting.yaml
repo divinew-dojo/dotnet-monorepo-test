@@ -35,9 +35,11 @@ jobs:
 
 #    steps:
 #      - name: E2E SIT Test Report
-#        if: "{{ success() || failure() }}" # run this step even if previous step failed
+#        {% raw %}
+#        if: ${{ success() || failure() }} # run this step even if previous step failed
 #        continue-on-error: true
 #        run: |
 #          OWNER_REPO_NAME=${{ github.repository }}
 #          REPO_NAME=$(echo "$OWNER_REPO_NAME" | cut -d'/' -f2)
 #          echo "End-2-End SIT NScenario Test Report : https://${{ github.repository_owner }}.github.io/$REPO_NAME/htmlReports/${{ github.ref_name }}/index.html"
+#        {% endraw %}
